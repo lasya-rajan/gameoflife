@@ -10,24 +10,31 @@ L. Rajan
 
 #include <iostream>
 #include <cstring>
+#include <windows.h>
 
 using namespace std;
 
-const int SIZE = 10; 
+const int GRID_SIZE = 10; 
+
+const int GENERATION_LIMIT = 50; 
+
+const int LONG_SLEEP = 5000;
+
+const int SLEEP_TIME = 1;
 
 
 int main()
 {
-	char grid[SIZE][SIZE] = {
+	char grid[GRID_SIZE][GRID_SIZE] = {
 							{'X','X','X','X','X','X','X','X','X','X'}, //1
 							{'X','X','X','X','X','X','X','X','X','X'}, //2
-							{'.','.','.','X','X','X','.','.','.','.'}, //3
-							{'X','.','.','X','.','.','.','.','X','.'}, //4
-							{'.','.','.','.','.','X','.','.','.','.'}, //5 
-							{'X','X','X','X','X','.','.','.','.','.'}, //6
-							{'X','.','.','.','X','.','.','.','.','.'}, //7
-							{'X','.','.','.','.','.','.','.','.','.'}, //8
-							{'.','.','.','.','.','.','.','.','.','.'}, //9
+							{'.','.','.','X','X','X','.','X','.','.'}, //3
+							{'X','X','X','X','.','X','.','X','X','.'}, //4
+							{'.','X','X','X','.','X','X','X','X','.'}, //5 
+							{'X','X','X','X','X','.','.','.','X','.'}, //6
+							{'X','.','X','.','X','.','X','X','X','X'}, //7
+							{'X','X','X','.','.','.','.','X','X','X'}, //8
+							{'.','X','X','X','X','.','X','.','X','X'}, //9
 							{'X','X','X','X','.','.','.','.','.','.'}, //10
 																	}; 
 
@@ -36,11 +43,11 @@ int main()
 
 	int row = 0;
 	int col = 0;
-	int liveNeighbors = 0; 
+	int liveNeighbors = 0;
+	int generationCount = 0;  
 	bool alive; 
-	int userChoice; 
 
-	int generationCount = 0; 
+	
 
 
 	cout << "Welcome to Conway's Game of Life." << endl; 
@@ -48,9 +55,9 @@ int main()
 	cout << "Initial grid state:" << endl;
 	cout << endl;
 
-	for (row = 0; row < SIZE; row++)
+	for (row = 0; row < GRID_SIZE; row++)
 	{
-	        for (col = 0; col < SIZE; col++)
+	        for (col = 0; col < GRID_SIZE; col++)
 	        {
 	            cout<<grid[row][col]<<"  ";
 	        }
@@ -61,19 +68,19 @@ int main()
 	cout << endl;
 	cout << endl;
 
-	cout << "Press 1 to view next generation,";
-	cout << "or press 0 to exit." << endl; 
-	cout << endl;
-	cin >> userChoice;
+	cout << "Beginning simulation..." << endl; 
 
-	while (userChoice == 1)
+	Sleep(LONG_SLEEP);
+
+	system("cls");  ////////////////////////////////////////////CLEAR SCREEN 
+
+	while (generationCount <= GENERATION_LIMIT)
 	{
-		generationCount++;
-
+		
 		//alive state is X, dead state is . 
 
-		for(row = 0; row < SIZE; row++)           //iterate through the grid 
-			for(col = 0; col < SIZE; col++)
+		for(row = 0; row < GRID_SIZE; row++)           //iterate through the grid 
+			for(col = 0; col < GRID_SIZE; col++)
 			{
 
 				// reset counter/bool 
@@ -141,15 +148,14 @@ int main()
 
 			} // end of iterative for loop 
 
+			generationCount++;
 
 			//print grid 
 				
-			cout << "Generation count: " << generationCount << endl;
-			cout << endl; 
 
-			for (row = 0; row < SIZE; row++)
+			for (row = 0; row < GRID_SIZE; row++)
 			{
-		        for (col = 0; col < SIZE; col++)
+		        for (col = 0; col < GRID_SIZE; col++)
 		        {
 		            cout<<grid[row][col]<<"  ";
 		        }
@@ -157,18 +163,18 @@ int main()
 	 		cout<<endl;
 			}
 
-			cout << endl;
-			cout << endl;
+			Sleep(1000); //delays screen for one second to allow viewing 
 
-
-			cout << "1 or 0?" << endl;
-			cin >> userChoice; 
+			system("cls"); /////////////////////////////////////////////////CLEAR SCREEN
 
 
 
-		} // end of while userChoice loop
+
+		} // end of while generationLimit loop
 
 
+
+cout << "Thank you for watching the Game of Life." << endl; 
 
 
 return 0;
