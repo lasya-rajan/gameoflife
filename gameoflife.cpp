@@ -163,7 +163,7 @@ int main()
 	 		cout<<endl;
 			}
 
-			Sleep(1000); //delays screen for one second to allow viewing 
+			Sleep(SLEEP_TIME); //delays screen for one second to allow viewing 
 
 			system("cls"); /////////////////////////////////////////////////CLEAR SCREEN
 
